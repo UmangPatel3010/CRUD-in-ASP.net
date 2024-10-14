@@ -63,31 +63,11 @@ The primary goal of this project is to demonstrate the implementation of a stati
    ```
 
 4. **Run the Application**:
-```
+   ```
    dotnet run
-```
+   ```
 
    The application should now be running at `http://localhost:5000/`.
-
-### Database Schema
-
-Ensure your MySQL database has the following basic schema for the CRUD operations (example):
-
-```
-CREATE TABLE Users (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(100),
-    Email VARCHAR(100),
-    Age INT
-);
-```
-
-## Future Enhancements
-
-- Add **search functionality** to filter records.
-- Implement **authentication** for more secure data handling.
-- Expand the database schema for more complex CRUD operations.
-
 ## Conclusion
 
 This project demonstrates a static CRUD application using ASP.NET and MySQL, providing a solid foundation for building more complex applications in the future. It’s an ideal starting point for anyone looking to understand the basics of CRUD operations in a web environment using .NET and MySQL.
