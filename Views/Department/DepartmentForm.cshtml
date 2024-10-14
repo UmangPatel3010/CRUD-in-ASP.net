@@ -1,0 +1,27 @@
+﻿@model StaticCRUD.Models.DepartmentModel
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add Department</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3 " asp-controller="Department" asp-action="DepartmentForm">
+            <div class="col-md-6">
+                <label  asp-for="departmentName" class="form-label">Department Name</label>
+                <input type="text" asp-for="departmentName" class="form-control"  >
+                <span asp-validation-for="departmentName" style="color:red;"></span>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a asp-controller="Home" asp-action="Department"><input type="button" class="btn btn-danger" value="Cancel" /></a>
+            </div>
+        </form><!-- End Multi Columns Form -->
+
+        <h1>Department</h1>
+        <h3>@ViewBag.departmentData</h3>
+        <h3>@ViewBag.name</h3>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿@model StaticCRUD.Models.ProductModel
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add Product</h5>
+        <!-- Multi Columns Form -->
+        <form class="row g-3" asp-controller="Product" asp-action="ProductForm" method="post">
+            @if (Model?.ProductID != null)
+            {
+                <div class="col-md-6">
+                    <label class="form-label" asp-for="ProductID">Product ID</label>
+                    <input type="Text" asp-for="ProductID" value="@Model?.ProductID" class="form-control" disabled>
+                    <span asp-validation-for="ProductID" style="color:red"></span>
+                </div>
+            }
+            @Html.HiddenFor(x => x.ProductID)
+            <div class="col-md-6">
+                <label class="form-label" asp-for="ProductName">Product Name</label>
+                <input type="text" asp-for="ProductName" class="form-control">
+                <span asp-validation-for="ProductName" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="ProductPrice">Product Price</label>
+                <input type="text" asp-for="ProductPrice" class="form-control">
+                <span asp-validation-for="ProductPrice" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="ProductCode">Product Code</label>
+                <input type="text" asp-for="ProductCode" class="form-control">
+                <span asp-validation-for="ProductCode" style="color:red"></span>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" asp-for="Description">Description</label>
+                <input type="text" asp-for="Description" class="form-control">
+                <span asp-validation-for="Description" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="UserID">User ID</label>
+                <select class="form-select" aria-label="Default Select" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                    <option value="" disabled selected>Select User</option>
+                </select>
+                <span asp-validation-for="UserID" style="color:red"></span>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-primary" value="@((Model?.ProductID == null)?"Add":"Update")" />
+                <input type="reset" class="btn btn-secondary" value="Reset" @((Model?.ProductID != null) ? "hidden":"") />
+                <a asp-controller="Product" asp-action="ProductList" class="btn btn-danger">Back</a>
+            </div>
+        </form><!-- End Multi Columns Form -->
+    </div>
+</div>
+@Html.Raw(TempData["SuccessMsg"])
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

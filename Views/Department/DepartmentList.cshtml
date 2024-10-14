@@ -1,0 +1,38 @@
+﻿
+
+<div class="card m-0">
+    <div class="card-body">
+        <h5 class="card-title">Department Table</h5>
+
+
+        <a asp-controller="Department" asp-action="DepartmentForm">
+            <button type="button" class="btn btn-primary float-end"><i class="ri-add-circle-line"></i> Add Department</button>
+        </a>
+        <!-- Default Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">DepartmentId</th>
+                    <th scope="col">Department Name</th>
+                    <th scope="col">Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var dept in ViewBag.departmentData)
+                    {
+                        <tr>
+                            <td>@dept.departmentId</td>
+                            <td>@dept.departmentName</td>
+                            <td>
+                                <button type="button" class="btn btn-success "><i class="bx bxs-edit"></i></button>
+                                <button type="button" class="btn btn-danger "><i class="ri-delete-bin-2-fill"></i></button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <!-- End Default Table Example -->
+        
+</div>

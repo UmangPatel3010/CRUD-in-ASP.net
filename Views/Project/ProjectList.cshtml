@@ -1,0 +1,46 @@
+﻿@{
+
+}
+
+<div class="card m-0">
+    <div class="card-body">
+        <h5 class="card-title">Project Table</h5>
+
+
+        <a asp-controller="Project" asp-action="ProjectForm">
+            <button type="button" class="btn btn-primary float-end"><i class="ri-add-circle-line"></i> Add Project</button>
+        </a>
+        <!-- Default Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ProjectId</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col">Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var project in ViewBag.projectData)
+                    {
+                        <tr>
+                            <td>@project.projectId</td>
+                            <td>@project.projectName</td>
+                            <td>@project.startDate</td>
+                            <td>@project.endDate</td>
+                            <td>@project.budget</td>
+                            <td>
+                                <button type="button" class="btn btn-success "><i class="bx bxs-edit"></i></button>
+                                <button type="button" class="btn btn-danger "><i class="ri-delete-bin-2-fill"></i></button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <!-- End Default Table Example -->
+    </div>
+</div>

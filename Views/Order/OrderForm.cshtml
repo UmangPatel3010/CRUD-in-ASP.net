@@ -1,0 +1,73 @@
+﻿@model StaticCRUD.Models.OrderModel
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add Order</h5>
+        <!-- Multi Columns Form -->
+
+        <form class="row g-3" asp-controller="Order" asp-action="OrderForm" method="post">
+            @if (Model?.OrderID != null)
+            {
+                <div class="col-md-6">
+                    <label class="form-label" asp-for="OrderID">Product ID</label>
+                    <input type="Text" asp-for="OrderID" value="@Model?.OrderID" class="form-control" disabled>
+                    <span asp-validation-for="OrderID" style="color:red"></span>
+                </div>
+            }
+            @Html.HiddenFor(x => x.OrderID)
+            <div class="col-md-6">
+                <label class="form-label" asp-for="OrderNumber">Order Number</label>
+                <div class="input-group">
+                    <span class="input-group-text">ONR</span>
+                    <input type="text" asp-for="OrderNumber" class="form-control" />
+                </div>
+                <span asp-validation-for="OrderNumber" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="OrderDate">Order Date</label>
+                <input type="datetime-local" asp-for="OrderDate" class="form-control">
+                <span asp-validation-for="OrderDate" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="PaymentMode">Payment Mode</label>
+                <input type="text" asp-for="PaymentMode" class="form-control">
+                <span asp-validation-for="PaymentMode" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="TotalAmount">Total Amount</label>
+                <input type="text" asp-for="TotalAmount" class="form-control">
+                <span asp-validation-for="TotalAmount" style="color:red"></span>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" asp-for="ShippingAddress">Shipping Address</label>
+                <textarea asp-for="ShippingAddress" class="form-control"></textarea>
+                <span asp-validation-for="ShippingAddress" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="CustomerID">Customer ID</label>
+                <select class="form-select" aria-label="Default Select" asp-for="CustomerID" asp-items="@(new SelectList(ViewBag.CustomerList,"CustomerID","CustomerName"))">
+                    <option disabled selected>Select Customer</option>
+                </select>
+                <span asp-validation-for="CustomerID" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="UserID">User ID</label>
+                <select class="form-select" aria-label="Default Select" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList,"UserID","UserName"))">
+                    <option disabled selected>Select User</option>
+                </select>
+                <span asp-validation-for="UserID" style="color:red"></span>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-primary" value="@((Model?.OrderID == null)?"Add":"Update")" />
+                <input type="reset" class="btn btn-secondary" value="Reset" @((Model?.OrderID != null) ? "hidden" : "") />
+                <a asp-controller="Order" asp-action="OrderList" class="btn btn-danger">Back</a>
+            </div>
+        </form><!-- End Multi Columns Form -->
+    </div>
+</div>
+@Html.Raw(TempData["SuccessMsg"])
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

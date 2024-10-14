@@ -1,0 +1,62 @@
+﻿@model StaticCRUD.Models.EmployeeModel;
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add Employee</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3 " asp-controller="Employee" asp-action="EmployeeForm" method="post">
+            <div class="col-md-12">
+                <label for="validationCustom09" class="form-label">Employee Id</label>
+                <input type="text" class="form-control" id="validationCustom09">
+            </div>  
+            <div class="col-md-6">
+                <label class="form-label" asp-for="firstName">First name</label>
+                <input type="text" asp-for="firstName" class="form-control">
+                <span asp-validation-for="firstName" style="color:red"></span>
+                
+            </div>
+            <div class="col-md-6">
+                <label for="validationCustom02" class="form-label">Last name</label>
+                <input type="text" class="form-control" id="validationCustom02">
+            </div>
+            <div class="col-md-6">
+                <label for="validationCustom03" class="form-label">Email</label>
+                <input type="email" class="form-control" id="validationCustom03">
+            </div>
+            <div class="col-md-3">
+                <label for="validationCustom04" class="form-label">Phone Number</label>
+                <input type="text" pattern="\d{3}-\d{3}-\d{4}" class="form-control" id="validationCustom04">
+            </div>
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Hire Date</label>
+                <input type="date" class="form-control" id="validationCustom05">
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustom06" class="form-label">Job Title</label>
+                <input type="text" class="form-control" id="validationCustom06">
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustom07" class="form-label">Salary</label>
+                <input type="text" pattern="\d{1,}(\.\d{1,})?" class="form-control" id="validationCustom07">
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustom08" class="form-label">Deparment Id</label>
+                <input type="text" pattern="\d{1,}" class="form-control" id="validationCustom08">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a asp-controller="Home" asp-action="Employee"><input type="button" class="btn btn-danger" value="Cancel" /></a>
+            </div>
+        </form><!-- End Multi Columns Form -->
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

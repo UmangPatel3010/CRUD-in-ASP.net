@@ -1,0 +1,93 @@
+﻿@model StaticCRUD.Models.UserModel
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add User</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3" asp-controller="User" asp-action="UserForm" method="post">
+            @if (Model?.UserID != null)
+            {
+                <div class="col-md-6">
+                    <label class="form-label" asp-for="UserID">User ID</label>
+                    <input type="Text" asp-for="UserID" value="@Model?.UserID" class="form-control" disabled>
+                    <span asp-validation-for="UserID" style="color:red"></span>
+                </div>
+            }
+            <div class="col-md-6">
+                <label class="form-label" asp-for="UserName">User Name</label>
+                <input type="text" asp-for="UserName" class="form-control">
+                <span asp-validation-for="UserName" style="color:red"></span>
+            </div>
+            @Html.HiddenFor(x => x.UserID)
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Email">Email</label>
+                <input type="text" asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" style="color:red"></span>
+            </div>
+
+            @if (Model?.UserID != null)
+            {
+                @Html.HiddenFor(x => x.Password)
+            }
+            else
+            {
+                <div class="col-md-6">
+                    <label class="form-label" asp-for="Password">Password</label>
+                    <div class="input-group">
+                        <input type="password" asp-for="Password" class="form-control" id="passwordInput">
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="bi bi-eye" id="toggleIcon"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="Password" style="color:red"></span>
+                </div>
+            }
+            <div class="col-md-6">
+                <label class="form-label" asp-for="MobileNo">Mobile No</label>
+                <input type="text" asp-for="MobileNo" class="form-control">
+                <span asp-validation-for="MobileNo" style="color:red"></span>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" asp-for="Address">Address</label>
+                <textarea asp-for="Address" rows="5" class="form-control"></textarea>
+                <span asp-validation-for="Address" style="color:red"></span>
+            </div>
+            <div class="col-md-3">
+                <input type="checkbox" asp-for="IsActive" class="form-check-input">
+                <label class="form-label" asp-for="IsActive">Is Active</label>
+                <span asp-validation-for="IsActive" style="color:red"></span>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-primary" value="@((Model?.UserID == null)?"Add":"Update")" />
+                <input type="reset" class="btn btn-secondary" value="Reset" @((Model?.UserID != null) ? "hidden" : "") />
+                <a asp-controller="User" asp-action="UserList" class="btn btn-danger">Back</a>
+            </div>
+        </form><!-- End Multi Columns Form -->
+    </div>
+</div>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function (e) {
+        // Get the password input and the icon
+        var passwordInput = document.getElementById('passwordInput');
+        var toggleIcon = document.getElementById('toggleIcon');
+
+        // Toggle the password visibility
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove('bi-eye');
+            toggleIcon.classList.add('bi-eye-slash');
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.remove('bi-eye-slash');
+            toggleIcon.classList.add('bi-eye');
+        }
+    });
+</script>
+@Html.Raw(TempData["SuccessMsg"])
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

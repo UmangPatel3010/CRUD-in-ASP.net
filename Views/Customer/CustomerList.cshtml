@@ -1,0 +1,64 @@
+﻿@using System.Data;
+@model DataTable;
+
+<div class="card m-0">
+    <div class="card-body overflow-auto">
+        <h5 class="card-title position-sticky start-0">Customer Table</h5>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <span class="text-danger">@TempData["ErrorMessage"]</span>
+            <br>
+        }
+        <a asp-controller="Customer" asp-action="CustomerForm" class="position-sticky start-0">
+            <button type="button" class="btn btn-primary float-end"><i class="ri-add-circle-line"></i> Add Customer</button>
+        </a>
+        <!-- Default Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    @* <th>CustomerID</th> *@
+                    <th>CustomerName</th>
+                    <th>HomeAddress</th>
+                    <th>Email</th>
+                    <th>MobileNo</th>
+                    <th>GSTNO</th>
+                    <th>CityName</th>
+                    <th>PinCode</th>
+                    <th>NetAmount</th>
+                    <th>UserName</th>
+                    <th scope="col">Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow customer in Model.Rows)
+                {
+                    <tr>
+                        @*<td>@customer["CustomerID"]</td>*@
+                        <td>@customer["CustomerName"]</td>
+                        <td style="white-space: nowrap;">@customer["HomeAddress"]</td>
+                        <td>@customer["Email"]</td>
+                        <td>@customer["MobileNo"]</td>
+                        <td>@customer["GSTNO"]</td>
+                        <td>@customer["CityName"]</td>
+                        <td>@customer["PinCode"]</td>
+                        <td>@customer["NetAmount"]</td>
+                        <td>@customer["UserName"]</td>
+                        <td class="d-flex justify-content-evenly">
+                            <a method="post" class="btn btn-warning" asp-controller="Customer" asp-action="CustomerForm" asp-route-CustomerID="@customer["CustomerID"]">
+                                <i class="bx bxs-edit"></i>
+                            </a>
+                            <form method="post" asp-controller="Customer" asp-action="CustomerDelete">
+                                <input type="hidden" name="CustomerID" value="@customer["CustomerID"]" />
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete Customer : @customer["CustomerName"]')">
+                                    <i class="ri-delete-bin-2-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!-- End Default Table Example -->
+    </div>
+</div>
+

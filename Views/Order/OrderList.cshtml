@@ -1,0 +1,61 @@
+﻿@using System.Data;
+@model DataTable;
+
+<div class="card m-0">
+    <div class="card-body">
+        <h5 class="card-title">Order Table</h5>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <span class="text-danger">@TempData["ErrorMessage"]</span>
+            <br>
+        }
+
+        <a asp-controller="Order" asp-action="OrderForm">
+            <button type="button" class="btn btn-primary float-end"><i class="ri-add-circle-line"></i> Add Order</button>
+        </a>
+        <!-- Default Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    @* <th>OrderID</th> *@
+                    <th>OrderNumber</th>
+                    <th>OrderDate</th>
+                    <th>CustomerName</th>
+                    <th>PaymentMode</th>
+                    <th>TotalAmount</th>
+                    <th>ShippingAddress</th>
+                    <th>UserName</th>
+                    <th scope="col">Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow order in Model.Rows)
+                {
+                    <tr>
+                        @* <td>@order["OrderID"]</td> *@
+                        <td>@order["OrderNumber"]</td>
+                        <td>@order["OrderDate"]</td>
+                        <td>@order["CustomerName"]</td>
+                        <td>@order["PaymentMode"]</td>
+                        <td>@order["TotalAmount"]</td>
+                        <td>@order["ShippingAddress"]</td>
+                        <td>@order["UserName"]</td>
+                        <td class="d-flex justify-content-evenly">
+                            <a method="post" class="btn btn-warning" asp-controller="Order" asp-action="OrderForm" asp-route-OrderID="@order["OrderID"]">
+                                <i class="bx bxs-edit"></i>
+                            </a>
+                            <form method="post" asp-controller="Order" asp-action="OrderDelete">
+                                <input type="hidden" name="OrderID" value="@order["OrderID"]" />
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete Order : @order["OrderNumber"]')">
+                                    <i class="ri-delete-bin-2-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!-- End Default Table Example -->
+    </div>
+</div>
+

@@ -1,0 +1,59 @@
+﻿@using System.Data;
+@model DataTable;
+
+<div class="card m-0">
+    <div class="card-body">
+        <h5 class="card-title">User Table</h5>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <span class="text-danger">@TempData["ErrorMessage"]</span>
+            <br>
+        }
+
+        <a asp-controller="User" asp-action="UserForm">
+            <button type="button" class="btn btn-primary float-end"><i class="ri-add-circle-line"></i> Add User</button>
+        </a>
+        <!-- Default Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    @* <th>UserID</th> *@
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>MobileNo</th>
+                    <th>Address</th>
+                    <th>IsActive</th>
+                    <th scope="col">Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow user in Model.Rows)
+                {
+                    <tr>
+                        @*<td>@user["UserID"]</td>*@
+                        <td>@user["UserName"]</td>
+                        <td>@user["Email"]</td>
+                        <td>@user["Password"]</td>
+                        <td>@user["MobileNo"]</td>
+                        <td>@user["Address"]</td>
+                        <td>@user["IsActive"]</td>
+                        <td class="d-flex justify-content-evenly">
+                            <a method="post" class="btn btn-warning" asp-controller="User" asp-action="UserForm" asp-route-UserID="@user["UserID"]">
+                                <i class="bx bxs-edit"></i>
+                            </a>
+                            <form method="post" asp-controller="User" asp-action="UserDelete">
+                                <input type="hidden" name="UserID" value="@user["UserID"]" />
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete User : @user["UserName"]')">
+                                    <i class="ri-delete-bin-2-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!-- End Default Table Example -->
+    </div>
+</div>
+

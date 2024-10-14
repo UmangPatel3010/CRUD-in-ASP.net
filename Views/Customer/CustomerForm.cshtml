@@ -1,0 +1,82 @@
+﻿@model StaticCRUD.Models.CustomerModel
+
+<div class="card">
+    <div class="card-body ">
+        <h5 class="card-title">Add Customer</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3" asp-controller="Customer" asp-action="CustomerForm" method="post">
+            @if (Model?.CustomerID != null)
+            {
+                <div class="col-md-6">
+                    <label class="form-label" asp-for="CustomerID">Product ID</label>
+                    <input type="Text" asp-for="CustomerID" value="@Model?.CustomerID" class="form-control" disabled>
+                    <span asp-validation-for="CustomerID" style="color:red"></span>
+                </div>
+            }
+            @Html.HiddenFor(x => x.CustomerID)
+            <div class="@((Model?.CustomerID != null)?"col-md-6":"col-md-12")">
+                <label class="form-label" asp-for="CustomerName">Customer Name</label>
+                <input type="text" asp-for="CustomerName" class="form-control">
+                <span asp-validation-for="CustomerName" style="color:red"></span>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" asp-for="HomeAddress">Home Address</label>
+                <textarea asp-for="HomeAddress" rows="3" class="form-control "></textarea>
+                <span asp-validation-for="HomeAddress" style="color:red; resize: none;"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Email">Email</label>
+                <input type="text" asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="MobileNo">Mobile No</label>
+                <input type="text" asp-for="MobileNo" class="form-control">
+                <span asp-validation-for="MobileNo" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="GSTNO">GST NO</label>
+                <div class="input-group">
+                    <span class="input-group-text">GST</span>
+                    <input type="text" asp-for="GSTNO" class="form-control">
+                </div>
+                <span asp-validation-for="GSTNO" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="CityName">City Name</label>
+                <input type="text" asp-for="CityName" class="form-control">
+                <span asp-validation-for="CityName" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="PinCode">Pin Code</label>
+                <input type="text" asp-for="PinCode" class="form-control">
+                <span asp-validation-for="PinCode" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="NetAmount">Net Amount</label>
+                <input type="text" asp-for="NetAmount" class="form-control">
+                <span asp-validation-for="NetAmount" style="color:red"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="UserID">User ID</label>
+                <select class="form-select" aria-label="Default Select" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                    <option value="" disabled selected>Select User</option>
+                </select>
+                <span asp-validation-for="UserID" style="color:red"></span>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-primary" value="@((Model?.CustomerID == null)?"Add":"Update")" />
+                <input type="reset" class="btn btn-secondary" value="Reset" @((Model?.CustomerID != null) ? "hidden" : "") />
+                <a asp-controller="Customer" asp-action="CustomerList" class="btn btn-danger">Back</a>
+            </div>
+        </form><!-- End Multi Columns Form -->
+    </div>
+</div>
+@Html.Raw(TempData["SuccessMsg"])
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

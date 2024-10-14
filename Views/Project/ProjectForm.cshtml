@@ -1,0 +1,54 @@
+﻿@{
+
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add Project</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3 needs-validation" novalidate>
+            <div class="col-md-6">
+                <label for="validationCustom06" class="form-label">Project Id</label>
+                <input type="text" pattern="\d{1,}" class="form-control" id="validationCustom06" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="validationCustom01" class="form-label">Project Name</label>
+                <input type="text" class="form-control" id="validationCustom01" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="validationCustom02" class="form-label">Start Date</label>
+                <input type="date" class="form-control" id="validationCustom02" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="validationCustom03" class="form-label">End Date</label>
+                <input type="date" class="form-control" id="validationCustom03" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustom04" class="form-label">Budget</label>
+                <input type="text" pattern="\d{1,}(\.\d{1,})?" class="form-control" id="validationCustom04" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a asp-controller="Home" asp-action="Project"><input type="button" class="btn btn-danger" value="Cancel" /></a>
+            </div>
+        </form><!-- End Multi Columns Form -->
+
+    </div>
+</div>
