@@ -23,8 +23,8 @@ namespace StaticCRUD.Controllers
             SqlCommand command = con.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "sp_GetAllUsers";
-            DataTable dt = new DataTable();
             SqlDataReader sdr = command.ExecuteReader();
+            DataTable dt = new DataTable();
             dt.Load(sdr);
             return View(dt);
         }
@@ -104,7 +104,6 @@ namespace StaticCRUD.Controllers
         {
             try
             {
-
                 string connectionString = this._configuration.GetConnectionString("myConnectionString");
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
