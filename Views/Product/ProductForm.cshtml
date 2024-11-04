@@ -16,27 +16,27 @@
             }
             @Html.HiddenFor(x => x.ProductID)
             <div class="col-md-6">
-                <label class="form-label" asp-for="ProductName">Product Name</label>
+                <label class="form-label" asp-for="ProductName">Product Name<span class="text-danger">*</span></label>
                 <input type="text" asp-for="ProductName" class="form-control">
                 <span asp-validation-for="ProductName" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="ProductPrice">Product Price</label>
+                <label class="form-label" asp-for="ProductPrice">Product Price<span class="text-danger">*</span></label>
                 <input type="text" asp-for="ProductPrice" class="form-control">
                 <span asp-validation-for="ProductPrice" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="ProductCode">Product Code</label>
+                <label class="form-label" asp-for="ProductCode">Product Code<span class="text-danger">*</span></label>
                 <input type="text" asp-for="ProductCode" class="form-control">
                 <span asp-validation-for="ProductCode" style="color:red"></span>
             </div>
             <div class="col-md-12">
-                <label class="form-label" asp-for="Description">Description</label>
+                <label class="form-label" asp-for="Description">Description<span class="text-danger">*</span></label>
                 <input type="text" asp-for="Description" class="form-control">
                 <span asp-validation-for="Description" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="UserID">User ID</label>
+                <label class="form-label" asp-for="UserID">User Name<span class="text-danger">*</span></label>
                 <select class="form-select" aria-label="Default Select" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
                     <option value="" disabled selected>Select User</option>
                 </select>

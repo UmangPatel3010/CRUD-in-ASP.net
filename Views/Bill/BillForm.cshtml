@@ -16,40 +16,40 @@
             }
             @Html.HiddenFor(x=>x.BillID)
             <div class="col-md-6">
-                <label class="form-label" asp-for="BillNumber">Bill Number</label>
+                <label class="form-label" asp-for="BillNumber">Bill Number<span class="text-danger">*</span></label>
                 <input type="text" asp-for="BillNumber" class="form-control">
                 <span asp-validation-for="BillNumber" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="BillDate">Bill Date</label>
+                <label class="form-label" asp-for="BillDate">Bill Date<span class="text-danger">*</span></label>
                 <input type="datetime-local" asp-for="BillDate" class="form-control">
                 <span asp-validation-for="BillDate" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="OrderID">Order ID</label>
+                <label class="form-label" asp-for="OrderID">Order Number<span class="text-danger">*</span></label>
                 <select class="form-select" aria-label="Default Select" asp-for="OrderID" asp-items="@(new SelectList(ViewBag.OrderList, "OrderID", "OrderNumber"))">
                     <option value="" disabled selected>Select Order</option>
                 </select>
                 <span asp-validation-for="OrderID" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="TotalAmount">Total Amount</label>
+                <label class="form-label" asp-for="TotalAmount">Total Amount<span class="text-danger">*</span></label>
                 <input type="text" asp-for="TotalAmount" class="form-control">
                 <span asp-validation-for="TotalAmount" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="Discount">Discount</label>
+                <label class="form-label" asp-for="Discount">Discount<span class="text-danger">*</span></label>
                 <input type="text" asp-for="Discount" class="form-control">
                 <span asp-validation-for="Discount" style="color:red"></span>
             </div>
             @Html.HiddenFor(x=>x.NetAmount)
             @* <div class="col-md-6">
-                <label class="form-label" asp-for="NetAmount">Net Amount</label>
+                <label class="form-label" asp-for="NetAmount">Net Amount<span class="text-danger">*</span></label>
                 <input type="text" asp-for="NetAmount" class="form-control" value="0.0">
                 <span asp-validation-for="NetAmount" style="color:red"></span>
             </div> *@
             <div class="col-md-6">
-                <label class="form-label" asp-for="UserID">User ID</label>
+                <label class="form-label" asp-for="UserID">User Name<span class="text-danger">*</span></label>
                 <select class="form-select" aria-label="Default Select" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
                     <option value="" disabled selected>Select User</option>
                 </select>

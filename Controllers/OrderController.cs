@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 
 namespace StaticCRUD.Controllers
 {
+    [CheckAccess]
     public class OrderController : Controller
     {
         private IConfiguration _configuration;

@@ -7,7 +7,6 @@ namespace StaticCRUD.Controllers
 {
     public class UserController : Controller
     {
-
         private IConfiguration _configuration;
         public UserController(IConfiguration configuration)
         {
@@ -15,6 +14,7 @@ namespace StaticCRUD.Controllers
         }
 
         #region UserList
+        [CheckAccess]
         public IActionResult UserList()
         {
             String connectionString = this._configuration.GetConnectionString("myConnectionString");
@@ -31,6 +31,7 @@ namespace StaticCRUD.Controllers
         #endregion
 
         #region UserForm
+        [CheckAccess]
         public IActionResult UserForm(int? UserID)
         {
             if (UserID != null)
@@ -62,6 +63,7 @@ namespace StaticCRUD.Controllers
 
         #region [HttpPost] UserForm
         [HttpPost]
+        [CheckAccess]
         public IActionResult UserForm(UserModel um)
         {
             ModelState.Remove("UserID");
@@ -71,7 +73,7 @@ namespace StaticCRUD.Controllers
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandType = CommandType.StoredProcedure;
                 if (um.UserID != 0)
                 {
                     command.CommandText = "sp_UpdateUser";
@@ -100,6 +102,7 @@ namespace StaticCRUD.Controllers
         #endregion
 
         #region UserDelete
+        [CheckAccess]
         public IActionResult UserDelete(int UserID)
         {
             try
@@ -110,7 +113,8 @@ namespace StaticCRUD.Controllers
                 SqlCommand command = connection.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "sp_DeleteUser";
-                command.Parameters.Add("@UserID", SqlDbType.Int).Value = UserID;
+                //command.Parameters.Add("@UserID", SqlDbType.Int).Value = UserID;
+                command.Parameters.AddWithValue("@UserID", UserID);
                 command.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -141,7 +145,7 @@ namespace StaticCRUD.Controllers
                     connection.Open();
                     SqlCommand command = connection.CreateCommand();
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.CommandText = "sp_LoginUser";
+                    command.CommandText = "sp_UserLogin";
                     command.Parameters.AddWithValue("@Email", user.Email);
                     command.Parameters.AddWithValue("@Password", user.Password);
                     SqlDataReader reader1 = command.ExecuteReader();
@@ -149,14 +153,14 @@ namespace StaticCRUD.Controllers
                     dt.Load(reader1);
                     if (dt.Rows.Count > 0)
                     {
-                        HttpContext.Session.SetString("Email", dt.Rows[0]["Email"].ToString());
-                        HttpContext.Session.SetString("Password", dt.Rows[0]["Password"].ToString());
+                        HttpContext.Session.SetString("UserID", dt.Rows[0]["UserID"].ToString());
+                        HttpContext.Session.SetString("UserName", dt.Rows[0]["UserName"].ToString());
+                        HttpContext.Session.SetString("EamilAddress", dt.Rows[0]["Email"].ToString());
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        TempData["ErrorMessage"] = "Invalid Username or Password";
-                        //return RedirectToAction("UserLogin", "User");
+                        TempData["ErrorMessage"] = "Email or Password is Wrong";
                     }
                 }
             }
@@ -164,15 +168,52 @@ namespace StaticCRUD.Controllers
             {
                 TempData["ErrorMessage"] = e.Message;
             }
-            return RedirectToAction("Login");
+            return RedirectToAction("UserLogin");
+        }
+        #endregion
+
+        #region User Logout
+        public IActionResult UserLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("UserLogin", "User");
         }
         #endregion
 
         #region UserRegister
         [HttpGet]
-        public ActionResult UserRegister()
+        public IActionResult UserRegister()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult UserRegister(UserModel userModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    string connectionString = this._configuration.GetConnectionString("myConnectionString");
+                    SqlConnection sqlConnection = new SqlConnection(connectionString);
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = sqlConnection.CreateCommand();
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.CommandText = "PR_User_Register";
+                    sqlCommand.Parameters.AddWithValue("UserName", userModel.UserName);
+                    sqlCommand.Parameters.AddWithValue("Password",userModel.Password);
+                    sqlCommand.Parameters.AddWithValue("Email",userModel.Email);
+                    sqlCommand.Parameters.AddWithValue("MobileNo",userModel.MobileNo);
+                    sqlCommand.Parameters.AddWithValue("Address",userModel.Address);
+                    sqlCommand.ExecuteNonQuery();
+                    return RedirectToAction("UserLogin", "User");
+                }
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = e.Message;
+                return RedirectToAction("UserRegister");
+            }
+            return RedirectToAction("UserRegister");
         }
         #endregion
     }

@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Register.cshtml";
+    ViewBag.Title = "Register";
+}
+
+@model StaticCRUD.Models.UserModel
+
+
+<main>
+    <div class="container">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex justify-content-center py-4">
+                            <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center w-auto">
+                                <img src="~/img/logo3.png" alt="">
+                                <span class="d-none d-lg-block">Coffee Shop</span>
+                            </a>
+                        </div><!-- End Logo -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                                    <p class="text-center small">Enter your personal details to create account</p>
+                                </div>
+
+                                <form class="row g-3" asp-controller="User" asp-action="UserRegister">
+                                    <div class="col-6">
+                                        <label asp-for="UserName" class="form-label">UserName<span class="text-danger">*</span></label>
+                                        <input type="text" asp-for="UserName" class="form-control" >
+                                        <span class="text-danger" asp-validation-for="UserName"></span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label asp-for="Password" class="form-label">Password<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <input type="password" asp-for="Password" class="form-control" id="passwordInput">
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                <i class="bi bi-eye" id="toggleIcon"></i>
+                                            </button>
+                                        </div>
+                                        <span class="text-danger" asp-validation-for="Password"></span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label asp-for="Email" class="form-label">Email<span class="text-danger">*</span></label>
+                                        <input type="email" asp-for="Email" class="form-control" >
+                                        <span class="text-danger" asp-validation-for="Email"></span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label asp-for="MobileNo" class="form-label">Mobile Number<span class="text-danger">*</span></label>
+                                        <input type="text" asp-for="MobileNo" class="form-control" >
+                                        <span class="text-danger" asp-validation-for="MobileNo"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label asp-for="Address" class="form-label">Address<span class="text-danger">*</span></label>
+                                        <input type="text" asp-for="Address" class="form-control" >
+                                        <span class="text-danger" asp-validation-for="Address"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                                            <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a><span class="text-danger">*</span></label>
+                                            <div class="invalid-feedback">You must agree before submitting.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Already have an account? <a asp-controller="User" asp-action="UserLogin">Log in</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main><!-- End #main -->
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        var passwordInput = document.getElementById('passwordInput');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            document.getElementById('toggleIcon').classList.remove('bi-eye');
+            document.getElementById('toggleIcon').classList.add('bi-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            document.getElementById('toggleIcon').classList.remove('bi-eye-slash');
+            document.getElementById('toggleIcon').classList.add('bi-eye');
+        }
+    });
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

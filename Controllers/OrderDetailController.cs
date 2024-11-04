@@ -5,6 +5,7 @@ using System.Data;
 
 namespace StaticCRUD.Controllers
 {
+    [CheckAccess]
     public class OrderDetailController : Controller
     {
         private IConfiguration _configuration;

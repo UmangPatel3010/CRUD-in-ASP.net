@@ -9,34 +9,34 @@
             @if (Model?.CustomerID != null)
             {
                 <div class="col-md-6">
-                    <label class="form-label" asp-for="CustomerID">Product ID</label>
+                    <label class="form-label" asp-for="CustomerID">Customer ID</label>
                     <input type="Text" asp-for="CustomerID" value="@Model?.CustomerID" class="form-control" disabled>
                     <span asp-validation-for="CustomerID" style="color:red"></span>
                 </div>
             }
             @Html.HiddenFor(x => x.CustomerID)
             <div class="@((Model?.CustomerID != null)?"col-md-6":"col-md-12")">
-                <label class="form-label" asp-for="CustomerName">Customer Name</label>
+                <label class="form-label" asp-for="CustomerName">Customer Name<span class="text-danger">*</span></label>
                 <input type="text" asp-for="CustomerName" class="form-control">
                 <span asp-validation-for="CustomerName" style="color:red"></span>
             </div>
             <div class="col-md-12">
-                <label class="form-label" asp-for="HomeAddress">Home Address</label>
+                <label class="form-label" asp-for="HomeAddress">Home Address<span class="text-danger">*</span></label>
                 <textarea asp-for="HomeAddress" rows="3" class="form-control "></textarea>
                 <span asp-validation-for="HomeAddress" style="color:red; resize: none;"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="Email">Email</label>
+                <label class="form-label" asp-for="Email">Email<span class="text-danger">*</span></label>
                 <input type="text" asp-for="Email" class="form-control">
                 <span asp-validation-for="Email" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="MobileNo">Mobile No</label>
+                <label class="form-label" asp-for="MobileNo">Mobile No<span class="text-danger">*</span></label>
                 <input type="text" asp-for="MobileNo" class="form-control">
                 <span asp-validation-for="MobileNo" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="GSTNO">GST NO</label>
+                <label class="form-label" asp-for="GSTNO">GST NO<span class="text-danger">*</span></label>
                 <div class="input-group">
                     <span class="input-group-text">GST</span>
                     <input type="text" asp-for="GSTNO" class="form-control">
@@ -44,22 +44,22 @@
                 <span asp-validation-for="GSTNO" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="CityName">City Name</label>
+                <label class="form-label" asp-for="CityName">City Name<span class="text-danger">*</span></label>
                 <input type="text" asp-for="CityName" class="form-control">
                 <span asp-validation-for="CityName" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="PinCode">Pin Code</label>
+                <label class="form-label" asp-for="PinCode">Pin Code<span class="text-danger">*</span></label>
                 <input type="text" asp-for="PinCode" class="form-control">
                 <span asp-validation-for="PinCode" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="NetAmount">Net Amount</label>
+                <label class="form-label" asp-for="NetAmount">Net Amount<span class="text-danger">*</span></label>
                 <input type="text" asp-for="NetAmount" class="form-control">
                 <span asp-validation-for="NetAmount" style="color:red"></span>
             </div>
             <div class="col-md-6">
-                <label class="form-label" asp-for="UserID">User ID</label>
+                <label class="form-label" asp-for="UserID">User Name<span class="text-danger">*</span></label>
                 <select class="form-select" aria-label="Default Select" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
                     <option value="" disabled selected>Select User</option>
                 </select>

@@ -19,8 +19,9 @@ namespace StaticCRUD.Models
         [RegularExpression(@"^(?=.*[a-zA-Z])(?=.*\d).{8,}$", ErrorMessage = "Password must be at least 8 characters long and contain both letters and numbers.")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Mobile No is required.")]
+        [Required(ErrorMessage = "Mobile No. is required.")]
         [Phone(ErrorMessage = "Invalid Mobile No.")]
+        [RegularExpression("^[1-9]{1}[0-9]{9}$",ErrorMessage ="It should have 10 digits only")]
         public string MobileNo { get; set; }
 
         [Required(ErrorMessage = "Address is required.")]
@@ -37,10 +38,10 @@ namespace StaticCRUD.Models
     public class UserLoginModel
     {
         [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [EmailAddress(ErrorMessage ="Enter a Valid Email")]
+        public required string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
-        public string Password { get; set; }
+        public required string Password { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 namespace StaticCRUD.Controllers
 {
+    [CheckAccess]
     public class CustomerController : Controller
     {
         private IConfiguration _configuration;

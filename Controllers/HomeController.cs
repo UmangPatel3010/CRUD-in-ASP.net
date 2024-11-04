@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using StaticCRUD;
 using StaticCRUD.Models;
 using System.Diagnostics;
 
 namespace NiceAdminDemo_3.Controllers
 {
+    [CheckAccess]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

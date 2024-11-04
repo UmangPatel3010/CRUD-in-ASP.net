@@ -13,14 +13,14 @@
                     <span asp-validation-for="UserID" style="color:red"></span>
                 </div>
             }
+            @Html.HiddenFor(x => x.UserID)
             <div class="col-md-6">
-                <label class="form-label" asp-for="UserName">User Name</label>
+                <label class="form-label" asp-for="UserName">User Name<span class="text-danger">*</span></label>
                 <input type="text" asp-for="UserName" class="form-control">
                 <span asp-validation-for="UserName" style="color:red"></span>
             </div>
-            @Html.HiddenFor(x => x.UserID)
             <div class="col-md-6">
-                <label class="form-label" asp-for="Email">Email</label>
+                <label class="form-label" asp-for="Email">Email<span class="text-danger">*</span></label>
                 <input type="text" asp-for="Email" class="form-control">
                 <span asp-validation-for="Email" style="color:red"></span>
             </div>
@@ -32,7 +32,7 @@
             else
             {
                 <div class="col-md-6">
-                    <label class="form-label" asp-for="Password">Password</label>
+                    <label class="form-label" asp-for="Password">Password<span class="text-danger">*</span></label>
                     <div class="input-group">
                         <input type="password" asp-for="Password" class="form-control" id="passwordInput">
                         <button class="btn btn-outline-secondary" type="button" id="togglePassword">
@@ -43,18 +43,18 @@
                 </div>
             }
             <div class="col-md-6">
-                <label class="form-label" asp-for="MobileNo">Mobile No</label>
+                <label class="form-label" asp-for="MobileNo">Mobile No<span class="text-danger">*</span></label>
                 <input type="text" asp-for="MobileNo" class="form-control">
                 <span asp-validation-for="MobileNo" style="color:red"></span>
             </div>
             <div class="col-md-12">
-                <label class="form-label" asp-for="Address">Address</label>
+                <label class="form-label" asp-for="Address">Address<span class="text-danger">*</span></label>
                 <textarea asp-for="Address" rows="5" class="form-control"></textarea>
                 <span asp-validation-for="Address" style="color:red"></span>
             </div>
             <div class="col-md-3">
                 <input type="checkbox" asp-for="IsActive" class="form-check-input">
-                <label class="form-label" asp-for="IsActive">Is Active</label>
+                <label class="form-label" asp-for="IsActive">Is Active<span class="text-danger">*</span></label>
                 <span asp-validation-for="IsActive" style="color:red"></span>
             </div>
             <div class="col-12">
